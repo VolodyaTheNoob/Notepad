@@ -1,0 +1,21 @@
+body{
+    margin: 64px 64px 64px 64px;
+}
+#NavigationMenu{
+    width:256px;
+    display: inline-block;
+}
+.MenuDiv{
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 16px;
+    margin-right:16px;
+}
+.MenuDiv:hover{
+    cursor: pointer;
+}
+#Title{
+    font-size:32px;
+    display: inline-block;
+    width:132px;
+}
