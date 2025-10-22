@@ -29,8 +29,38 @@
             <label for="Note"></label>
             <textarea id="Note" name="Note" rows="32" cols="128"></textarea>
         </div>
+        <div id="SaveButton">
+            <button name="SaveButton">Save note</button>
+        </div>
+    </div>
+    <div id="ContextMenu">
+        <ul>
+            <li class="MenuButton" id="Quote"><q>Quote</q></li>
+            <li class="MenuButton" id="Bold"><b>Bold</b></li>
+            <li class="MenuButton" id="Italics"><i>Italics</i></li>
+            <li class="MenuButton" id="Underlined"><u>Underlined</u></li>
+            <li class="MenuButton" id="CrossedOut"><s>Crossed out</s></li>
+            <li class="MenuButton" id="Copy">Copy</li>
+            <li class="MenuButton" id="Insert">Insert</li>
+            <li class="MenuButton" id="Cut">Cut</li>
+            <li class="MenuButton" id="Color">Color</li>
+            <li class="MenuButton" id="Font">Font</li>
+            <li class="MenuButton" id="Image">Image</li>
+        </ul>
+    </div>
+    <div id="SaveMenu" class="Menu">
+        <div class="close"></div>
+        <a>Save as: </a>
+        <ul>
+            <li class="MenuButton" id="SaveAsTextFile">Text file</li>
+            <li class="MenuButton" id="SaveAsTextFileJSON">Text JSON File</li>
+            <li class="MenuButton">Word</li>
+            <li class="MenuButton">PDF</li>
+            <li class="MenuButton">HTML</li>
+        </ul>
     </div>
 </div>
+<script type="module" src="../js/Notebook/NoteRedactor/Redactor.js"></script>
+<script type="module" src="../js/Notebook/Notebook.js"></script>
 </body>
-<script src="../js/Notebook/Notebook.js"></script>
 </html>
