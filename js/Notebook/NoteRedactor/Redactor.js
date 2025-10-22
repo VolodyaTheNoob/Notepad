@@ -1,23 +1,32 @@
 import { downloadAsTextFile, downloadAsTextFileJSON } from '../Files.mjs';
 import { Menu } from '../Menu.mjs'
 
-let body = null;
-
 let NoteTitleDiv = document.getElementById("NoteTitle");
 let NoteDiv = document.getElementById("Note");
-let ContextMenu = document.getElementById("ContextMenu");
 
+//Class Menu
+let ContextMenu = new Menu("ContextMenu","MenuButton");
+//Creation function for Menu
+function ContextMenuFunc(){
+ ContextMenu.DOM.addEventListener("contextmenu",
+    (event) => {event.preventDefault;});
+ }
+//Attaching function to Menu
+ContextMenu.BindFuncToMenu("contextmenu", ContextMenuFunc, []);
+
+//Attaching function to NoteRedactor
 NoteDiv.addEventListener('contextmenu', (event) => {
     event.preventDefault();
-    if(getComputedStyle(ContextMenu).display === "none"){
-        ContextMenu.style.marginTop = Math.abs(NoteDiv.getBoundingClientRect().top - event.y - 72) + "px";
-        ContextMenu.style.marginLeft = Math.abs(NoteDiv.getBoundingClientRect().left - event.x - 312) + "px";
-        ContextMenu.style.display = "block";
+    if(getComputedStyle(ContextMenu.DOM).display === "none"){
+        ContextMenu.DOM.style.marginTop = Math.abs(NoteDiv.getBoundingClientRect().top - event.y - 72) + "px";
+        ContextMenu.DOM.style.marginLeft = Math.abs(NoteDiv.getBoundingClientRect().left - event.x - 312) + "px";
+        ContextMenu.DOM.style.display = "block";
     }else{
-        ContextMenu.style.display = "none";
+        ContextMenu.DOM.style.display = "none";
     }
 });
 
+//Getting last selected Note text
 let LastSelectedText;
 NoteDiv.onselect = (selected) =>{
     if (NoteDiv.selectionStart == NoteDiv.selectionEnd) {
@@ -27,9 +36,6 @@ NoteDiv.onselect = (selected) =>{
     let Selected = NoteDiv.value.slice(NoteDiv.selectionStart,NoteDiv.selectionEnd);
     LastSelectedText = Selected;
 };
-ContextMenu.addEventListener('contextmenu', function(event){
-    event.preventDefault();
-});
 
 let SaveFileButton = document.getElementById("SaveButton");
 let SaveMenu = document.getElementById("SaveMenu");
@@ -53,9 +59,4 @@ SaveAsTextFileJSONButton.addEventListener("mousedown", (event) =>{
     downloadAsTextFileJSON(NoteTitleDiv.value, NoteDiv.value);
 });
 
-let CntxMenu = new Menu("ContextMenu","MenuButton");
-CntxMenu.BindFuncByButtonId("mousedown","Quote",test);
 
-function test(){
-    console.log("hi");
-}
