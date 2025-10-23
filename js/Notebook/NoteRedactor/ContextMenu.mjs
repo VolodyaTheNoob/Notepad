@@ -3,11 +3,12 @@ import { Button } from '../Button.mjs'
 import {RedactorData} from "./RedactorData.mjs"
 
 //Attaching function to NoteRedactor - its works with context menu - so I add it here
-RedactorData.NoteTextArea.addEventListener('contextmenu', (event) => {
+RedactorData.NoteTextArea.DOM.addEventListener('contextmenu', (event) => {
+    let TextArea = RedactorData.NoteTextArea.DOM;
     event.preventDefault();
     if(getComputedStyle(ContextMenu.DOM).display === "none"){
-        ContextMenu.DOM.style.marginTop = Math.abs(RedactorData.NoteTextArea.getBoundingClientRect().top - event.y - 72) + "px";
-        ContextMenu.DOM.style.marginLeft = Math.abs(RedactorData.NoteTextArea.getBoundingClientRect().left - event.x - 312) + "px";
+        ContextMenu.DOM.style.marginTop = Math.abs(TextArea.getBoundingClientRect().top - event.y - 72) + "px";
+        ContextMenu.DOM.style.marginLeft = Math.abs(TextArea.getBoundingClientRect().left - event.x - 312) + "px";
         ContextMenu.DOM.style.display = "block";
     }else{
         ContextMenu.DOM.style.display = "none";
@@ -19,16 +20,16 @@ RedactorData.NoteTextArea.addEventListener('contextmenu', (event) => {
 let ContextMenuButtons = new Array();
 //Function to add tags in text
 function AddTag(e,RedactorData, Ltag,Rtag){
-    if(RedactorData.NoteTextArea.selectionStart != RedactorData.NoteTextArea.selectionEnd){
-        let textArea = RedactorData.NoteTextArea;
-        let Left = textArea.value.slice(0,RedactorData.LastSelectedTextPosStart);
-        let Quote = textArea.value.slice(RedactorData.LastSelectedTextPosStart,RedactorData.LastSelectedTextPosEnd);
-        let Right = textArea.value.slice(RedactorData.LastSelectedTextPosEnd,textArea.value.length);
+    let TextAreaDOM = RedactorData.NoteTextArea.DOM;
+    if(TextAreaDOM.selectionStart !=TextAreaDOM.selectionEnd){
+        let Left = TextAreaDOM.value.slice(0,RedactorData.NoteTextArea.LastSelectedTextPosStart);
+        let Quote = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosStart,RedactorData.NoteTextArea.LastSelectedTextPosEnd);
+        let Right = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosEnd,TextAreaDOM.value.length);
         let LeftTag = Ltag;
         let RightTag = Rtag;
         Left = Left + LeftTag;
         Right = RightTag + Right;
-        textArea.value = Left + Quote + Right;
+        TextAreaDOM.value = Left + Quote + Right;
     }
 }
 //QuoteButton
