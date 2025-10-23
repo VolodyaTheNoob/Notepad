@@ -32,8 +32,8 @@ export class Menu{
         this.EventsFunctions[event] = func;
         this.EventsFunctions[event]["Args"] = new Object();
         this.EventsFunctions[event]["Args"] = FuncArgs;
-        this.DOM.addEventListener(event, () => {
-            this.EventsFunctions[event](this.EventsFunctions[event]["Args"]);
+        this.DOM.addEventListener(event, (e) => {
+            this.EventsFunctions[event](e,this.EventsFunctions[event]["Args"]);
         });
     }
     BindFuncByButtonId(event,ID, func, ...FuncArgs){

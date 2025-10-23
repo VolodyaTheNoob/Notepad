@@ -29,16 +29,16 @@ export class Button{
         this.EventsFunctions[event] = new Object();
         this.EventsFunctions[event] = Func;
         this.EventsFunctions[event]["Args"] = FuncArgs;
-        this.DOM.addEventListener(event, () => {
-            this.EventsFunctions[event](this.EventsFunctions[event]["Args"]);
+        this.DOM.addEventListener(event, (e) => {
+            this.EventsFunctions[event](e,this.EventsFunctions[event]["Args"]);
         });
     }
     ReplaceEventFunc(event, Func, FuncArgs){
         this.DOM.removeEventListener('event', this.EventsFunctions[event]);
         this.EventsFunctions[event] = Func;
         this.EventsFunctions[event]["Args"] = FuncArgs;
-        this.DOM.addEventListener(event, () => {
-            this.EventsFunctions[event](this.EventsFunctions[event]["Args"]);
+        this.DOM.addEventListener(event, (e) => {
+            this.EventsFunctions[event](e,this.EventsFunctions[event]["Args"]);
         });
     }
     DeleteEventFunc(event){

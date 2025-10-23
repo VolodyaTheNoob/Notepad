@@ -1,20 +1,6 @@
-import {NoteTitleDiv, NoteDiv, LastSelectedText} from "./RedactorGlobalData.mjs"
-import { downloadAsTextFile, downloadAsTextFileJSON } from '../Files.mjs';
-import { Menu } from '../Menu.mjs'
-import { Button } from '../Button.mjs'
+import {RedactorData} from "./RedactorData.mjs"
 import { ContextMenu } from './ContextMenu.mjs';
-
-//Attaching function to NoteRedactor
-NoteDiv.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-    if(getComputedStyle(ContextMenu.DOM).display === "none"){
-        ContextMenu.DOM.style.marginTop = Math.abs(NoteDiv.getBoundingClientRect().top - event.y - 72) + "px";
-        ContextMenu.DOM.style.marginLeft = Math.abs(NoteDiv.getBoundingClientRect().left - event.x - 312) + "px";
-        ContextMenu.DOM.style.display = "block";
-    }else{
-        ContextMenu.DOM.style.display = "none";
-    }
-});
+import { downloadAsTextFile, downloadAsTextFileJSON } from '../Files.mjs';
 
 let SaveFileButton = document.getElementById("SaveButton");
 let SaveMenu = document.getElementById("SaveMenu");

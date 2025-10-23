@@ -1,46 +1,79 @@
 import { Menu } from '../Menu.mjs'
 import { Button } from '../Button.mjs'
-import {NoteTitleDiv, NoteDiv, LastSelectedText, LastSelectedTextPosStart, LastSelectedTextPosEnd} from "./RedactorGlobalData.mjs"
+import {RedactorData} from "./RedactorData.mjs"
+
+//Attaching function to NoteRedactor - its works with context menu - so I add it here
+RedactorData.NoteTextArea.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    if(getComputedStyle(ContextMenu.DOM).display === "none"){
+        ContextMenu.DOM.style.marginTop = Math.abs(RedactorData.NoteTextArea.getBoundingClientRect().top - event.y - 72) + "px";
+        ContextMenu.DOM.style.marginLeft = Math.abs(RedactorData.NoteTextArea.getBoundingClientRect().left - event.x - 312) + "px";
+        ContextMenu.DOM.style.display = "block";
+    }else{
+        ContextMenu.DOM.style.display = "none";
+    }
+});
 
 //Creating functions to ContextMenu
 //Array of Buttons for ContextMenu
 let ContextMenuButtons = new Array();
+//Function to add tags in text
+function AddTag(e,RedactorData, Ltag,Rtag){
+    if(RedactorData.NoteTextArea.selectionStart != RedactorData.NoteTextArea.selectionEnd){
+        let textArea = RedactorData.NoteTextArea;
+        let Left = textArea.value.slice(0,RedactorData.LastSelectedTextPosStart);
+        let Quote = textArea.value.slice(RedactorData.LastSelectedTextPosStart,RedactorData.LastSelectedTextPosEnd);
+        let Right = textArea.value.slice(RedactorData.LastSelectedTextPosEnd,textArea.value.length);
+        let LeftTag = Ltag;
+        let RightTag = Rtag;
+        Left = Left + LeftTag;
+        Right = RightTag + Right;
+        textArea.value = Left + Quote + Right;
+    }
+}
 //QuoteButton
 let QuoteButton = new Button("MenuButton","Quote");
-QuoteButton.AddEventFunc("mousedown",QuoteAdd,null);
-function QuoteAdd(){
-    let Left = NoteDiv.value.slice(0,LastSelectedTextPosStart);
-    let Quote = NoteDiv.value.slice(LastSelectedTextPosStart,LastSelectedTextPosEnd);
-    let Right = NoteDiv.value.slice(LastSelectedTextPosEnd,NoteDiv.value.length);
+QuoteButton.AddEventFunc("mousedown",QuoteAdd,RedactorData);
+function QuoteAdd(e,RedactorData){
     let qLeft = ["<q>"];
     let qRight = ["</q>"];
-    Left = Left + qLeft;
-    Right = qRight + Right;
-    NoteDiv.value = Left + Quote + Right;
+    AddTag(e,RedactorData,qLeft,qRight);
 }
 ContextMenuButtons.push(QuoteButton);//pushing to array of Buttons
 //BoldButton
 let BoldButton = new Button("MenuButton","Bold");
-function BoldAdd(){
-    
+BoldButton.AddEventFunc("mousedown",BoldAdd,RedactorData);
+function BoldAdd(e,RedactorData){
+    let qLeft = ["<b>"];
+    let qRight = ["</b>"];
+    AddTag(e,RedactorData,qLeft,qRight);
 }
 ContextMenuButtons.push(BoldButton);//pushing to array of Buttons
 //ItalicsButton
 let ItalicsButton = new Button("MenuButton","Italics");
-function ItalicsAdd(){
-    
+ItalicsButton.AddEventFunc("mousedown",ItalicsAdd,RedactorData);
+function ItalicsAdd(e,RedactorData){
+    let qLeft = ["<i>"];
+    let qRight = ["</i>"];
+    AddTag(e,RedactorData,qLeft,qRight);
 }
 ContextMenuButtons.push(ItalicsButton);//pushing to array of Buttons
 //UnderlinedButton
 let UnderlinedButton = new Button("MenuButton","Underlined");
-function UnderlinedAdd(){
-    
+UnderlinedButton.AddEventFunc("mousedown",UnderlinedAdd,RedactorData);
+function UnderlinedAdd(e,RedactorData){
+    let qLeft = ["<u>"];
+    let qRight = ["</u>"];
+    AddTag(e,RedactorData,qLeft,qRight);
 }
 ContextMenuButtons.push(UnderlinedButton);//pushing to array of Buttons
 //CrossedOutButton
 let CrossedOutButton = new Button("MenuButton","CrossedOut");
-function CrossedOutAdd(){
-    
+CrossedOutButton.AddEventFunc("mousedown",CrossedOutAdd,RedactorData);
+function CrossedOutAdd(e,RedactorData){
+    let qLeft = ["<s>"];
+    let qRight = ["</s>"];
+    AddTag(e,RedactorData,qLeft,qRight);
 }
 ContextMenuButtons.push(CrossedOutButton);//pushing to array of Buttons
 //CopyButton
