@@ -1,3 +1,9 @@
+.no-select {
+  -webkit-user-select: none; /* Safari, Chrome, Opera, Edge */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer 10+ */
+  user-select: none;         /* Стандартное свойство */
+}
 #Redactor{
     margin-top:16px;
     display: flex;
@@ -40,6 +46,22 @@
 
 #ContextMenu ul{
     padding-left:32px;
+}
+
+#FontSizePickMenu{
+    list-style-type: none;
+    border: 1px solid black;
+    max-height: 120px;
+    overflow-y: scroll
+}
+
+
+#FontSizePickMenu li {
+    height: 30px;
+    line-height: 30px;
+}
+#FontSizePickMenu li:hover{
+    cursor:pointer;
 }
 
 #SaveMenu{

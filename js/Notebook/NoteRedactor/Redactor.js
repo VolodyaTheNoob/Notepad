@@ -1,5 +1,5 @@
 import {RedactorData} from "./RedactorData.mjs"
-import { ContextMenu } from './ContextMenu.mjs';
+import { ContextMenu } from './ContextMenu/ContextMenu.mjs';
 import { downloadAsTextFile, downloadAsTextFileJSON } from '../Files.mjs';
 
 let SaveFileButton = document.getElementById("SaveButton");

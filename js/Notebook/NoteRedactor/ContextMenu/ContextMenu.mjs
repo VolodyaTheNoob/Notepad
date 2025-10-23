@@ -107,28 +107,71 @@ function Cut(e,RedactorData){
     }
 }
 ContextMenuButtons.push(CutButton);//pushing to array of Buttons
-//ColorButton
+//Open pick color menu
 let ColorButton = new Button("MenuButton","Color");
-ColorButton.AddEventFunc("mousedown",ColorAdd,RedactorData,"");
-function ColorAdd(e,RedactorData,color){
-    if(color != ""){
-        let Left = "<span style='color:'" + color + "'>";
+ColorButton.AddEventFunc("mousedown",OpenColorPickMenu,RedactorData," ");
+function OpenColorPickMenu(e,RedactorData){
+    let ColorPickMenu = document.getElementById("ColorPickMenu");
+    if(getComputedStyle(ColorPickMenu).display === "none"){
+        ColorPickMenu.style.display = "block";
+    }else{
+        ColorPickMenu.style.display = "none";
+    }
+}
+ContextMenuButtons.push(ColorButton);//pushing to array of Buttons
+//Pick color for text
+let TextColorChosenButton = new Button("MenuButton","TextColorChosen");
+TextColorChosenButton.AddEventFunc("mousedown",TextColorAdd,RedactorData," ");
+function TextColorAdd(e,RedactorData){
+    let Color = document.getElementById("TextColorPickInput").value;
+    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
+        let Left = "<span style='color:'" + Color + "'>";
         let Right = "</span>";
         AddTag(e,RedactorData,Left,Right);
     }
 }
-ContextMenuButtons.push(ColorButton);//pushing to array of Buttons
-//FontButton
-let FontButton = new Button("MenuButton","Font");
-FontButton.AddEventFunc("mousedown",FontAdd,RedactorData,"");
+ContextMenuButtons.push(TextColorChosenButton);//pushing to array of Buttons
+//Pick color for backgorund text
+let BackgroundTextColorChosenButton = new Button("MenuButton","BackgroundTextColorChosen");
+BackgroundTextColorChosenButton.AddEventFunc("mousedown",BackgroundTextColorAdd,RedactorData," ");
+function BackgroundTextColorAdd(e,RedactorData){
+    let Color = document.getElementById("BackgroundTextColorPickInput").value;
+    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
+        let Left = "<span style='background-color:'" + Color + "'>";
+        let Right = "</span>";
+        AddTag(e,RedactorData,Left,Right);
+    }
+}
+ContextMenuButtons.push(BackgroundTextColorChosenButton);//pushing to array of Buttons
+//FontButtonMenuOpen
+let FontSizeButtonMenuOpen = new Button("MenuButton","Font");
+FontSizeButtonMenuOpen.AddEventFunc("mousedown",OpenFontPickMenu,RedactorData,"");
+function OpenFontPickMenu(e,RedactorData){
+      let FontPickMenu = document.getElementById("FontSizePickMenu");
+    if(getComputedStyle(FontPickMenu).display === "none"){
+        FontPickMenu.style.display = "block";
+    }else{
+        FontPickMenu.style.display = "none";
+    }
+}
+ContextMenuButtons.push(FontSizeButtonMenuOpen);//pushing to array of Buttons
+//Adding for each font size button listener;
+let FontSizeChangeButtonsDom = document.getElementsByClassName("FontSizeToPick");
+let FontSizeChangeButtons = new Array(FontSizeChangeButtonsDom.length);
+for(let i = 0; i < FontSizeChangeButtons.length;i++){
+    FontSizeChangeButtons[i] = new Button("MenuButton","FontSizeToPick-"+FontSizeChangeButtonsDom[i].innerHTML);
+    FontSizeChangeButtons[i].DOM.addEventListener("mousedown", (e) =>{
+        FontAdd(e,RedactorData,FontSizeChangeButtonsDom[i].innerHTML);
+    });
+}
 function FontAdd(e,RedactorData,fontsize){
-    if(fontsize != ""){
+    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
         let Left = "<span style='font-size:'" + fontsize + "'>";
         let Right = "</span>";
         AddTag(e,RedactorData,Left,Right);
     }
 }
-ContextMenuButtons.push(FontButton);//pushing to array of Buttons
+ContextMenuButtons.push();//pushing to array of Buttons
 //ImgButton
 /*
 let ImgButton = new Button("MenuButton","Img");

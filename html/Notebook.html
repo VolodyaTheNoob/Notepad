@@ -35,21 +35,48 @@
     </div>
     <div id="ContextMenu">
         <ul>
-            <li class="MenuButton" id="Quote"><q>Quote</q></li>
-            <li class="MenuButton" id="Bold"><b>Bold</b></li>
-            <li class="MenuButton" id="Italics"><i>Italics</i></li>
-            <li class="MenuButton" id="Underlined"><u>Underlined</u></li>
-            <li class="MenuButton" id="CrossedOut"><s>Crossed out</s></li>
-            <li class="MenuButton" id="Copy">Copy</li>
-            <li class="MenuButton" id="Insert">Insert</li>
-            <li class="MenuButton" id="Cut">Cut</li>
-            <li class="MenuButton" id="Color">Color</li>
-            <li class="MenuButton" id="Font">Font</li>
-            <li class="MenuButton" id="Image">Image</li>
+            <li class="MenuButton no-select" id="Quote"><q>Quote</q></li>
+            <li class="MenuButton no-select" id="Bold"><b>Bold</b></li>
+            <li class="MenuButton no-select" id="Italics"><i>Italics</i></li>
+            <li class="MenuButton no-select" id="Underlined"><u>Underlined</u></li>
+            <li class="MenuButton no-select" id="CrossedOut"><s>Crossed out</s></li>
+            <li class="MenuButton no-select" id="Copy">Copy</li>
+            <li class="MenuButton no-select" id="Insert">Insert</li>
+            <li class="MenuButton no-select" id="Cut">Cut</li>
+            <li class="MenuButton no-select" id="Color">Color</li>
+            <ul id="ColorPickMenu" style="display: none;">
+                <li>
+                <span>Text Color: </span>     
+                <input id="TextColorPickInput" value="#000" data-jscolor="{}">
+                <span class="MenuButton no-select" id="TextColorChosen">Done</span>
+                </li>
+                <li>
+                <span>Background Color: </span>     
+                <input id="BackgroundTextColorPickInput" value="#000" data-jscolor="{}">
+                <span class="MenuButton no-select" id="BackgroundTextColorChosen">Done</span>
+                </li>
+            </ul>
+            <li class="MenuButton no-select" id="Font">Font size</li>
+            <ul id="FontSizePickMenu" style="display: none;"> 
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-8">8</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-9">9</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-10">10</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-11">11</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-12">12</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-14">14</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-16">16</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-18">18</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-20">20</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-22">22</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-24">24</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-26">26</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-28">28</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-36">36</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-48">48</li>
+                <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-72">72</li>        
+            </ul>
+            <li class="MenuButton no-select" id="Image">Image</li>
         </ul>
-        <div>
-            <input value="#000" data-jscolor="{}">
-        </div>
     </div>
     <div id="SaveMenu" class="Menu">
         <div class="close"></div>
@@ -65,6 +92,6 @@
 </div>
 <script type="module" src="../js/Notebook/NoteRedactor/Redactor.js"></script>
 <script type="module" src="../js/Notebook/Notebook.js"></script>
-<script type="module" src="../js/Notebook/NoteRedactor/ContextMenu/jscolor.min.js"></script>
+<script src="../js/Notebook/NoteRedactor/ContextMenu/jscolor.min.js"></script>
 </body>
 </html>
