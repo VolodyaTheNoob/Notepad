@@ -8,7 +8,6 @@ export class TextAreaClass{
         this.CopyBuffer = "";
         this.ForwardBuffer = [];
         this.BackwardBuffer = [];
-        this.AddOnSelectListener();
     }
     get LastSelectedText(){
         return this._LastSelectedText;

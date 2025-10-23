@@ -36,83 +36,112 @@ function AddTag(e,RedactorData, Ltag,Rtag){
 let QuoteButton = new Button("MenuButton","Quote");
 QuoteButton.AddEventFunc("mousedown",QuoteAdd,RedactorData);
 function QuoteAdd(e,RedactorData){
-    let qLeft = ["<q>"];
-    let qRight = ["</q>"];
-    AddTag(e,RedactorData,qLeft,qRight);
+    let Left = ["<q>"];
+    let Right = ["</q>"];
+    AddTag(e,RedactorData,Left,Right);
 }
 ContextMenuButtons.push(QuoteButton);//pushing to array of Buttons
 //BoldButton
 let BoldButton = new Button("MenuButton","Bold");
 BoldButton.AddEventFunc("mousedown",BoldAdd,RedactorData);
 function BoldAdd(e,RedactorData){
-    let qLeft = ["<b>"];
-    let qRight = ["</b>"];
-    AddTag(e,RedactorData,qLeft,qRight);
+    let Left = ["<b>"];
+    let Right = ["</b>"];
+    AddTag(e,RedactorData,Left,Right);
 }
 ContextMenuButtons.push(BoldButton);//pushing to array of Buttons
 //ItalicsButton
 let ItalicsButton = new Button("MenuButton","Italics");
 ItalicsButton.AddEventFunc("mousedown",ItalicsAdd,RedactorData);
 function ItalicsAdd(e,RedactorData){
-    let qLeft = ["<i>"];
-    let qRight = ["</i>"];
-    AddTag(e,RedactorData,qLeft,qRight);
+    let Left = ["<i>"];
+    let Right = ["</i>"];
+    AddTag(e,RedactorData,Left,Right);
 }
 ContextMenuButtons.push(ItalicsButton);//pushing to array of Buttons
 //UnderlinedButton
 let UnderlinedButton = new Button("MenuButton","Underlined");
 UnderlinedButton.AddEventFunc("mousedown",UnderlinedAdd,RedactorData);
 function UnderlinedAdd(e,RedactorData){
-    let qLeft = ["<u>"];
-    let qRight = ["</u>"];
-    AddTag(e,RedactorData,qLeft,qRight);
+    let Left = ["<u>"];
+    let Right = ["</u>"];
+    AddTag(e,RedactorData,Left,Right);
 }
 ContextMenuButtons.push(UnderlinedButton);//pushing to array of Buttons
 //CrossedOutButton
 let CrossedOutButton = new Button("MenuButton","CrossedOut");
 CrossedOutButton.AddEventFunc("mousedown",CrossedOutAdd,RedactorData);
 function CrossedOutAdd(e,RedactorData){
-    let qLeft = ["<s>"];
-    let qRight = ["</s>"];
-    AddTag(e,RedactorData,qLeft,qRight);
+    let Left = ["<s>"];
+    let Right = ["</s>"];
+    AddTag(e,RedactorData,Left,Right);
 }
 ContextMenuButtons.push(CrossedOutButton);//pushing to array of Buttons
 //CopyButton
 let CopyButton = new Button("MenuButton","Copy");
-function Copy(){
-    
+CopyButton.AddEventFunc("mousedown",Copy,RedactorData);
+function Copy(e,RedactorData){
+    RedactorData.NoteTextArea.CopyBuffer = RedactorData.NoteTextArea.LastSelectedText;
 }
 ContextMenuButtons.push(CopyButton);//pushing to array of Buttons
 //InsertButton
 let InsertButton = new Button("MenuButton","Insert");
-function Insert(){
-    
+InsertButton.AddEventFunc("mousedown",Insert,RedactorData);
+function Insert(e,RedactorData){
+    let TextAreaDOM = RedactorData.NoteTextArea.DOM;
+    let Left = TextAreaDOM.value.slice(0,RedactorData.NoteTextArea.LastSelectedTextPosStart);
+    let Insert = RedactorData.NoteTextArea.CopyBuffer;
+    let Right = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosEnd,TextAreaDOM.value.length);
+    TextAreaDOM.value = Left + Insert + Right;
 }
 ContextMenuButtons.push(InsertButton);//pushing to array of Buttons
 //CutButton
 let CutButton = new Button("MenuButton","Cut");
-function Cut(){
-    
+CutButton.AddEventFunc("mousedown",Cut,RedactorData);
+function Cut(e,RedactorData){
+    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
+        let TextAreaDOM = RedactorData.NoteTextArea.DOM;
+        let Left = TextAreaDOM.value.slice(0,RedactorData.NoteTextArea.LastSelectedTextPosStart);
+        let Right = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosEnd,TextAreaDOM.value.length);
+        TextAreaDOM.value = Left + Right;
+    }
 }
 ContextMenuButtons.push(CutButton);//pushing to array of Buttons
 //ColorButton
 let ColorButton = new Button("MenuButton","Color");
-function ColorAdd(){
-    
+ColorButton.AddEventFunc("mousedown",ColorAdd,RedactorData,"");
+function ColorAdd(e,RedactorData,color){
+    if(color != ""){
+        let Left = "<span style='color:'" + color + "'>";
+        let Right = "</span>";
+        AddTag(e,RedactorData,Left,Right);
+    }
 }
 ContextMenuButtons.push(ColorButton);//pushing to array of Buttons
 //FontButton
 let FontButton = new Button("MenuButton","Font");
-function FontAdd(){
-    
+FontButton.AddEventFunc("mousedown",FontAdd,RedactorData,"");
+function FontAdd(e,RedactorData,fontsize){
+    if(fontsize != ""){
+        let Left = "<span style='font-size:'" + fontsize + "'>";
+        let Right = "</span>";
+        AddTag(e,RedactorData,Left,Right);
+    }
 }
 ContextMenuButtons.push(FontButton);//pushing to array of Buttons
 //ImgButton
+/*
 let ImgButton = new Button("MenuButton","Img");
-function ImgAdd(){
-    
+ImgButton.AddEventFunc("mousedown",ImgAdd,RedactorData,"");
+function ImgAdd(e,RedactorData,imglink){
+    if(imglink != ""){
+        let Left = "<img src='" + imglink + "'>";
+        let Right = "</img>";
+        AddTag(e,RedactorData,Left,Right);
+    }
 }
 ContextMenuButtons.push(ImgButton);//pushing to array of Buttons
+*/
 
 //Class Menu
 export let ContextMenu = new Menu("ContextMenu",ContextMenuButtons);

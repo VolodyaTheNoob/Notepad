@@ -1,7 +1,10 @@
 import { TextAreaClass } from "./TextArea.mjs";
 
+//Creating our redactor TextAreas
 let _titleTextArea = new TextAreaClass("NoteTitle");
 let _noteTextArea = new TextAreaClass("Note");
+//turnning on listeners for note redactor
+_noteTextArea.AddOnSelectListener(); 
 export class RedactorDataClass{
     constructor(titleTextArea, noteTextArea){
         /*
