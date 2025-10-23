@@ -1,8 +1,12 @@
 export class Menu{
-    constructor(ID, Class){
+    constructor(ID, Buttons){
         this.ID = ID
         this.DOM = document.getElementById(ID);
-        this.Buttons = document.getElementsByClassName(Class)
+        if(this.Buttons !== undefined){
+            this.Buttons = [...Buttons];
+        }else{
+            this.Buttons = new Array();
+        }
         this.EventsFunctions = new Object();
         this.ButtonsEventsFunctions = new Object();
     }
@@ -26,42 +30,33 @@ export class Menu{
     }
     BindFuncToMenu(event, func, ...FuncArgs){
         this.EventsFunctions[event] = func;
-        this.EventsFunctions[event]["args"] = new Object();
-        console.log(this.EventsFunctions);
-        this.EventsFunctions[event]["args"] = FuncArgs;
+        this.EventsFunctions[event]["Args"] = new Object();
+        this.EventsFunctions[event]["Args"] = FuncArgs;
+        this.DOM.addEventListener(event, () => {
+            this.EventsFunctions[event](this.EventsFunctions[event]["Args"]);
+        });
     }
     BindFuncByButtonId(event,ID, func, ...FuncArgs){
         let Position = this.FindButtonPosition(ID);
-        this.ButtonsEventsFunctions[Position] = new Object();
-        this.ButtonsEventsFunctions[Position][event] = func;
-        this.ButtonsEventsFunctions[Position][event]["Args"] = new Object();
-        for(let i = 0; i < FuncArgs.length;i++){
-            this.ButtonsEventsFunctions[Position][event]["Args"][FuncArgs[i]] = FuncArgs[i];
-        }
-        console.log(this.ButtonsEventsFunctions[Position][event]["Args"]);
-        this.Buttons[Position].addEventListener(event, (e)=>{
-            this.ButtonsEventsFunctions[Position][event](this.ButtonsEventsFunctions[Position][event]["Args"]);
-        });
+        this.Buttons[Position].addEventFunc(event, func, FuncArgs);
     }
     FindButtonPosition(ID){
         let Position;
         for(let i = 0; i < this.Buttons.length; i++){
-            if(this.Buttons[i].id == ID){
+            if(this.Buttons[i].ID == ID){
                 Position = i;
             }
         }
         return Position;
     }
     BindFuncByButtonPosition(event, Position, func, FuncArgs){
-        this.ButtonsEventsFunctions[Position] = new Object();
-        this.ButtonsEventsFunctions[Position][event] = func;
-        this.ButtonsEventsFunctions[Position][event]["Args"] = new Object();
-        for(let i = 0; i < FuncArgs.length;i++){
-            this.ButtonsEventsFunctions[Position][event]["Args"][FuncArgs[i]] = FuncArgs[i];
-        }
-        console.log(this.ButtonsEventsFunctions[Position][event]["Args"]);
-        this.Buttons[Position].addEventListener(event, (e)=>{
-            this.ButtonsEventsFunctions[Position][event](this.ButtonsEventsFunctions[Position][event]["Args"]);
-        });
+        this.Buttons[Position].addEventFunc(event, func, FuncArgs);
     }
+    AddButton(Button){
+        this.Buttons.push(Button);
+    }
+    AddButtons(ButtonsArr){
+        this.Buttons = [...ButtonsArr];
+    }
+    //Also should add ReplaceFunctions and DeleteFunctions - becouse when we need to change function we dont need to use "new Object()" method
 }

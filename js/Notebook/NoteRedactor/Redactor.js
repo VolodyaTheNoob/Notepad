@@ -1,18 +1,8 @@
+import {NoteTitleDiv, NoteDiv, LastSelectedText} from "./RedactorGlobalData.mjs"
 import { downloadAsTextFile, downloadAsTextFileJSON } from '../Files.mjs';
 import { Menu } from '../Menu.mjs'
-
-let NoteTitleDiv = document.getElementById("NoteTitle");
-let NoteDiv = document.getElementById("Note");
-
-//Class Menu
-let ContextMenu = new Menu("ContextMenu","MenuButton");
-//Creation function for Menu
-function ContextMenuFunc(){
- ContextMenu.DOM.addEventListener("contextmenu",
-    (event) => {event.preventDefault;});
- }
-//Attaching function to Menu
-ContextMenu.BindFuncToMenu("contextmenu", ContextMenuFunc, []);
+import { Button } from '../Button.mjs'
+import { ContextMenu } from './ContextMenu.mjs';
 
 //Attaching function to NoteRedactor
 NoteDiv.addEventListener('contextmenu', (event) => {
@@ -25,17 +15,6 @@ NoteDiv.addEventListener('contextmenu', (event) => {
         ContextMenu.DOM.style.display = "none";
     }
 });
-
-//Getting last selected Note text
-let LastSelectedText;
-NoteDiv.onselect = (selected) =>{
-    if (NoteDiv.selectionStart == NoteDiv.selectionEnd) {
-        LastSelectedText = "";
-        return; 
-    }
-    let Selected = NoteDiv.value.slice(NoteDiv.selectionStart,NoteDiv.selectionEnd);
-    LastSelectedText = Selected;
-};
 
 let SaveFileButton = document.getElementById("SaveButton");
 let SaveMenu = document.getElementById("SaveMenu");
