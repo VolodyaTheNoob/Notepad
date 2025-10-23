@@ -1,6 +1,6 @@
-import { Menu } from '../Menu.mjs'
-import { Button } from '../Button.mjs'
-import {RedactorData} from "./RedactorData.mjs"
+import { Menu } from '../../Menu.mjs'
+import { Button } from '../../Button.mjs'
+import {RedactorData} from "../RedactorData.mjs"
 
 //Attaching function to NoteRedactor - its works with context menu - so I add it here
 RedactorData.NoteTextArea.DOM.addEventListener('contextmenu', (event) => {
