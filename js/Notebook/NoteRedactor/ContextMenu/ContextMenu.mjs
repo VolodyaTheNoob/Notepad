@@ -172,20 +172,39 @@ function FontAdd(e,RedactorData,fontsize){
     }
 }
 ContextMenuButtons.push();//pushing to array of Buttons
-//ImgButton
-/*
-let ImgButton = new Button("MenuButton","Img");
-ImgButton.AddEventFunc("mousedown",ImgAdd,RedactorData,"");
-function ImgAdd(e,RedactorData,imglink){
-    if(imglink != ""){
-        let Left = "<img src='" + imglink + "'>";
-        let Right = "</img>";
-        AddTag(e,RedactorData,Left,Right);
+//ImgagePickMenuOpen
+let ImgButton = new Button("MenuButton","Image");
+ImgButton.AddEventFunc("mousedown",ImagePickMenuOpen,RedactorData,"");
+function ImagePickMenuOpen(e,RedactorData){
+    let ImagePickMenu = document.getElementById("ImagePickMenu");
+    if(getComputedStyle(ImagePickMenu).display === "none"){
+        ImagePickMenu.style.display = "block";
+    }else{
+        ImagePickMenu.style.display = "none";
     }
 }
 ContextMenuButtons.push(ImgButton);//pushing to array of Buttons
-*/
-
+//ImagePickMenu
+let ImageInputReader = new FileReader();
+let ImageInput = document.getElementById("LoadedImage");
+ImageInputReader.addEventListener('load', e => {
+  ImageInput.src = e.target.result;
+});
+document.addEventListener('DOMContentLoaded', e => {
+  document.forms.ImagePickForm.ImagePickInput.addEventListener('change', e => {
+    ImageInputReader.readAsDataURL(e.target.files[0]); 
+  });
+});
+//ImageAddButton
+let ImageAddButton = new Button("MenuButton","ImageChosen");
+ImageAddButton.AddEventFunc("mousedown",ImgAdd,RedactorData,"");
+function ImgAdd(e,RedactorData){
+    let ImgBase64 = document.getElementById("LoadedImage").src;
+    let Left = "<img src='" + ImgBase64  + "'>";
+    let Right = "</img>";
+    AddTag(e,RedactorData,Left,Right);
+}
+ContextMenuButtons.push(ImageAddButton);//pushing to array of Buttons
 //Class Menu
 export let ContextMenu = new Menu("ContextMenu",ContextMenuButtons);
 //Creation function for Menu

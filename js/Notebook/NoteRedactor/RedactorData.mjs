@@ -13,6 +13,8 @@ export class RedactorDataClass{
         */
         this.TitleTextArea = titleTextArea;
         this.NoteTextArea = noteTextArea;
+        this.TitleText;
+        this.NoteText;
     }
 }
 export let RedactorData = new RedactorDataClass(_titleTextArea,_noteTextArea);

@@ -76,6 +76,13 @@
                 <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-72">72</li>        
             </ul>
             <li class="MenuButton no-select" id="Image">Image</li>
+            <ul id="ImagePickMenu" style="display: none;">
+                <form name="ImagePickForm">
+                    <input name="ImagePickInput" type="file" />
+                    <img id="LoadedImage" style="display: none;"></img>
+                    <span class="MenuButton no-select" id="ImageChosen">Add</span>   
+                </form>
+            </ul>
         </ul>
     </div>
     <div id="SaveMenu" class="Menu">
