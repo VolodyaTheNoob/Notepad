@@ -84,3 +84,14 @@
     cursor: pointer;
 }
 
+#NoteTitle{
+    width: 600px;
+    height:16px;
+    border: 1px solid black;
+}
+
+#Note{
+    width: 600px;
+    height: 400px;
+    border: 1px solid black;
+}

@@ -1,10 +1,15 @@
-import { TextAreaClass } from "./TextArea.mjs";
+import { TextAreaDOMClass } from "./TextAreaDOM.mjs";
 
 //Creating our redactor TextAreas
-let _titleTextArea = new TextAreaClass("NoteTitle");
-let _noteTextArea = new TextAreaClass("Note");
+let _titleTextArea = new TextAreaDOMClass("NoteTitle");
+let _noteTextArea = new TextAreaDOMClass("Note");
 //turnning on listeners for note redactor
+_titleTextArea.AddOnSelectListener();
+_titleTextArea.AddPreventDefault();
 _noteTextArea.AddOnSelectListener(); 
+_noteTextArea.AddPreventDefault();
+_noteTextArea.AddCursorPositionCheck();
+
 export class RedactorDataClass{
     constructor(titleTextArea, noteTextArea){
         /*
@@ -13,8 +18,7 @@ export class RedactorDataClass{
         */
         this.TitleTextArea = titleTextArea;
         this.NoteTextArea = noteTextArea;
-        this.TitleText;
-        this.NoteText;
     }
 }
 export let RedactorData = new RedactorDataClass(_titleTextArea,_noteTextArea);
+

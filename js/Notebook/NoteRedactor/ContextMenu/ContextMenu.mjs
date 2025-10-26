@@ -2,79 +2,59 @@ import { Menu } from '../../Menu.mjs'
 import { Button } from '../../Button.mjs'
 import {RedactorData} from "../RedactorData.mjs"
 
-//Attaching function to NoteRedactor - its works with context menu - so I add it here
-RedactorData.NoteTextArea.DOM.addEventListener('contextmenu', (event) => {
-    let TextArea = RedactorData.NoteTextArea.DOM;
-    event.preventDefault();
-    if(getComputedStyle(ContextMenu.DOM).display === "none"){
-        ContextMenu.DOM.style.marginTop = Math.abs(TextArea.getBoundingClientRect().top - event.y - 72) + "px";
-        ContextMenu.DOM.style.marginLeft = Math.abs(TextArea.getBoundingClientRect().left - event.x - 312) + "px";
-        ContextMenu.DOM.style.display = "block";
-    }else{
-        ContextMenu.DOM.style.display = "none";
-    }
-});
-
 //Creating functions to ContextMenu
 //Array of Buttons for ContextMenu
 let ContextMenuButtons = new Array();
 //Function to add tags in text
-function AddTag(e,RedactorData, Ltag,Rtag){
-    let TextAreaDOM = RedactorData.NoteTextArea.DOM;
-    if(TextAreaDOM.selectionStart !=TextAreaDOM.selectionEnd){
-        let Left = TextAreaDOM.value.slice(0,RedactorData.NoteTextArea.LastSelectedTextPosStart);
-        let Quote = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosStart,RedactorData.NoteTextArea.LastSelectedTextPosEnd);
-        let Right = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosEnd,TextAreaDOM.value.length);
-        let LeftTag = Ltag;
-        let RightTag = Rtag;
-        Left = Left + LeftTag;
-        Right = RightTag + Right;
-        TextAreaDOM.value = Left + Quote + Right;
-    }
+function AddTag(e,RedactorData, Tag, InnerStyleType = "", InnerStyleValue = ""){
+    RedactorData.NoteTextArea.surroundContents(Tag, InnerStyleType, InnerStyleValue);
+}
+function DeleteSelection(){
+    window.getSelection().empty();
 }
 //QuoteButton
 let QuoteButton = new Button("MenuButton","Quote");
 QuoteButton.AddEventFunc("mousedown",QuoteAdd,RedactorData);
 function QuoteAdd(e,RedactorData){
-    let Left = ["<q>"];
-    let Right = ["</q>"];
-    AddTag(e,RedactorData,Left,Right);
+    let Tag = "q";
+    AddTag(e,RedactorData,Tag);
+    DeleteSelection();
 }
 ContextMenuButtons.push(QuoteButton);//pushing to array of Buttons
 //BoldButton
 let BoldButton = new Button("MenuButton","Bold");
 BoldButton.AddEventFunc("mousedown",BoldAdd,RedactorData);
 function BoldAdd(e,RedactorData){
-    let Left = ["<b>"];
-    let Right = ["</b>"];
-    AddTag(e,RedactorData,Left,Right);
+    let Tag = "b";
+    AddTag(e,RedactorData, Tag);
+    DeleteSelection();
 }
 ContextMenuButtons.push(BoldButton);//pushing to array of Buttons
 //ItalicsButton
 let ItalicsButton = new Button("MenuButton","Italics");
 ItalicsButton.AddEventFunc("mousedown",ItalicsAdd,RedactorData);
 function ItalicsAdd(e,RedactorData){
-    let Left = ["<i>"];
-    let Right = ["</i>"];
-    AddTag(e,RedactorData,Left,Right);
+    let Tag = "i";
+    AddTag(e,RedactorData, Tag);
+    DeleteSelection();
 }
 ContextMenuButtons.push(ItalicsButton);//pushing to array of Buttons
 //UnderlinedButton
 let UnderlinedButton = new Button("MenuButton","Underlined");
 UnderlinedButton.AddEventFunc("mousedown",UnderlinedAdd,RedactorData);
 function UnderlinedAdd(e,RedactorData){
-    let Left = ["<u>"];
-    let Right = ["</u>"];
-    AddTag(e,RedactorData,Left,Right);
+    let Tag = "u";
+    AddTag(e,RedactorData, Tag);
+    DeleteSelection();
 }
 ContextMenuButtons.push(UnderlinedButton);//pushing to array of Buttons
 //CrossedOutButton
 let CrossedOutButton = new Button("MenuButton","CrossedOut");
 CrossedOutButton.AddEventFunc("mousedown",CrossedOutAdd,RedactorData);
 function CrossedOutAdd(e,RedactorData){
-    let Left = ["<s>"];
-    let Right = ["</s>"];
-    AddTag(e,RedactorData,Left,Right);
+    let Tag = "s";
+    AddTag(e,RedactorData, Tag);
+    DeleteSelection();
 }
 ContextMenuButtons.push(CrossedOutButton);//pushing to array of Buttons
 //CopyButton
@@ -82,29 +62,23 @@ let CopyButton = new Button("MenuButton","Copy");
 CopyButton.AddEventFunc("mousedown",Copy,RedactorData);
 function Copy(e,RedactorData){
     RedactorData.NoteTextArea.CopyBuffer = RedactorData.NoteTextArea.LastSelectedText;
+    DeleteSelection();
 }
 ContextMenuButtons.push(CopyButton);//pushing to array of Buttons
 //InsertButton
 let InsertButton = new Button("MenuButton","Insert");
 InsertButton.AddEventFunc("mousedown",Insert,RedactorData);
 function Insert(e,RedactorData){
-    let TextAreaDOM = RedactorData.NoteTextArea.DOM;
-    let Left = TextAreaDOM.value.slice(0,RedactorData.NoteTextArea.LastSelectedTextPosStart);
-    let Insert = RedactorData.NoteTextArea.CopyBuffer;
-    let Right = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosEnd,TextAreaDOM.value.length);
-    TextAreaDOM.value = Left + Insert + Right;
+    RedactorData.NoteTextArea.insertNode(RedactorData.NoteTextArea.CopyBuffer);
+    DeleteSelection();
 }
 ContextMenuButtons.push(InsertButton);//pushing to array of Buttons
 //CutButton
 let CutButton = new Button("MenuButton","Cut");
 CutButton.AddEventFunc("mousedown",Cut,RedactorData);
 function Cut(e,RedactorData){
-    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
-        let TextAreaDOM = RedactorData.NoteTextArea.DOM;
-        let Left = TextAreaDOM.value.slice(0,RedactorData.NoteTextArea.LastSelectedTextPosStart);
-        let Right = TextAreaDOM.value.slice(RedactorData.NoteTextArea.LastSelectedTextPosEnd,TextAreaDOM.value.length);
-        TextAreaDOM.value = Left + Right;
-    }
+    RedactorData.NoteTextArea.deleteContents();
+    DeleteSelection();
 }
 ContextMenuButtons.push(CutButton);//pushing to array of Buttons
 //Open pick color menu
@@ -124,11 +98,11 @@ let TextColorChosenButton = new Button("MenuButton","TextColorChosen");
 TextColorChosenButton.AddEventFunc("mousedown",TextColorAdd,RedactorData," ");
 function TextColorAdd(e,RedactorData){
     let Color = document.getElementById("TextColorPickInput").value;
-    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
-        let Left = "<span style='color:'" + Color + "'>";
-        let Right = "</span>";
-        AddTag(e,RedactorData,Left,Right);
-    }
+    let Tag = "span"
+    let InnerStyleType = "color"
+    let InnerStyleValue = Color;
+    AddTag(e,RedactorData,Tag, InnerStyleType, InnerStyleValue);
+    DeleteSelection();
 }
 ContextMenuButtons.push(TextColorChosenButton);//pushing to array of Buttons
 //Pick color for backgorund text
@@ -136,11 +110,11 @@ let BackgroundTextColorChosenButton = new Button("MenuButton","BackgroundTextCol
 BackgroundTextColorChosenButton.AddEventFunc("mousedown",BackgroundTextColorAdd,RedactorData," ");
 function BackgroundTextColorAdd(e,RedactorData){
     let Color = document.getElementById("BackgroundTextColorPickInput").value;
-    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
-        let Left = "<span style='background-color:'" + Color + "'>";
-        let Right = "</span>";
-        AddTag(e,RedactorData,Left,Right);
-    }
+    let Tag = "span"
+    let InnerStyleType = "background-color"
+    let InnerStyleValue = Color;
+    AddTag(e,RedactorData,Tag, InnerStyleType, InnerStyleValue);
+    DeleteSelection();
 }
 ContextMenuButtons.push(BackgroundTextColorChosenButton);//pushing to array of Buttons
 //FontButtonMenuOpen
@@ -165,11 +139,11 @@ for(let i = 0; i < FontSizeChangeButtons.length;i++){
     });
 }
 function FontAdd(e,RedactorData,fontsize){
-    if(RedactorData.NoteTextArea.LastSelectedTextPosStart != RedactorData.NoteTextArea.LastSelectedTextPosEnd){
-        let Left = "<span style='font-size:'" + fontsize + "'>";
-        let Right = "</span>";
-        AddTag(e,RedactorData,Left,Right);
-    }
+    let Tag = "span";
+    let InnerStyleType = "font-size";
+    let InnerStyleValue = fontsize + "px";
+    AddTag(e,RedactorData, Tag, InnerStyleType, InnerStyleValue);
+    DeleteSelection();
 }
 ContextMenuButtons.push();//pushing to array of Buttons
 //ImgagePickMenuOpen
@@ -199,10 +173,11 @@ document.addEventListener('DOMContentLoaded', e => {
 let ImageAddButton = new Button("MenuButton","ImageChosen");
 ImageAddButton.AddEventFunc("mousedown",ImgAdd,RedactorData,"");
 function ImgAdd(e,RedactorData){
+    let NewImageNode = document.createElement("img");;
     let ImgBase64 = document.getElementById("LoadedImage").src;
-    let Left = "<img src='" + ImgBase64  + "'>";
-    let Right = "</img>";
-    AddTag(e,RedactorData,Left,Right);
+    NewImageNode.src = ImgBase64;
+    RedactorData.NoteTextArea.insertNodeDirectly(NewImageNode);
+    DeleteSelection();
 }
 ContextMenuButtons.push(ImageAddButton);//pushing to array of Buttons
 //Class Menu
@@ -213,3 +188,12 @@ function ContextMenuFunc(){
     (event) => {event.preventDefault;});
  }
 ContextMenu.BindFuncToMenu("contextmenu", ContextMenuFunc, []);//Attaching function to Menu
+
+RedactorData.NoteTextArea.DOM.addEventListener("contextmenu", (e) =>{
+        e.preventDefault();
+        if(getComputedStyle(ContextMenu.DOM).display == "none"){
+            ContextMenu.DOM.style.display = "block";
+        }else{
+            ContextMenu.DOM.style.display = "none";
+        }
+});

@@ -64,4 +64,9 @@ export class TextAreaClass{
             this.LastSelectedText = Selected;
         };
     }
+    AddPreventDefault(){
+        this.DOM.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+        });
+    }
 }

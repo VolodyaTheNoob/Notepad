@@ -58,5 +58,10 @@ export class Menu{
     AddButtons(ButtonsArr){
         this.Buttons = [...ButtonsArr];
     }
+    AddPreventDefault(){
+        this.DOM.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+        });
+    }
     //Also should add ReplaceFunctions and DeleteFunctions - becouse when we need to change function we dont need to use "new Object()" method
 }
