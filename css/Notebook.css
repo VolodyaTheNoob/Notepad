@@ -1,6 +1,86 @@
+.no-select {
+  -webkit-user-select: none; /* Safari, Chrome, Opera, Edge */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer 10+ */
+  user-select: none;         /* Стандартное свойство */
+}
 #Redactor{
     margin-top:16px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+#TextRedactor{
+    z-index: 2;
+}
+
+.Menu{
+    border: 1px solid black;
+    padding: 2px 2px 2px 2px;
+}
+
+.MenuButton:hover{
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background-color: black;
+    clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+    right:0;
+}
+
+.close:hover{
+    cursor:pointer;
+}
+
+#ContextMenu{
+    position: absolute;
+    z-index: 1;
+    display: none;
+    left:0;
+    top:0;
+}
+
+#ContextMenu ul{
+    padding-left:32px;
+}
+
+#FontSizePickMenu{
+    list-style-type: none;
+    border: 1px solid black;
+    max-height: 120px;
+    overflow-y: scroll
+}
+
+
+#FontSizePickMenu li {
+    height: 30px;
+    line-height: 30px;
+}
+#FontSizePickMenu li:hover{
+    cursor:pointer;
+}
+
+#SaveMenu{
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+#SaveButton{
+    display: inline-block;
+    padding: 1px 1px 1px 1px;
+}
+
+#SaveButton button{
+    background-color: #fff;
+    border: 1px solid black;
+}
+
+#SaveButton button:hover{
+    cursor: pointer;
+}
+
