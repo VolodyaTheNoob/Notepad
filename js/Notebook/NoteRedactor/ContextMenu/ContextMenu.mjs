@@ -159,26 +159,50 @@ document.addEventListener('DOMContentLoaded', e => {
 let ImageAddButton = new Button("MenuButton","ImageChosen");
 ImageAddButton.AddEventFunc("mousedown",ImgAdd,RedactorData,"");
 function ImgAdd(e,RedactorData){
-    let NewImageNode = document.createElement("img");;
+    const MaxWidth = 600;
+    const MaxHeight = 400;
+    let ImgWidth = document.getElementById("ImageWidthInput").value;
+    let ImgHeight = document.getElementById("ImageHeightInput").value;
+    if(!isNaN(ImgWidth) && !isNaN(ImgHeight)){
+        if(ImgWidth > MaxWidth){
+            ImgWidth = MaxWidth;
+        }
+        if(ImgHeight > MaxHeight){
+            ImgHeight = MaxHeight;
+        }
+    }else{
+        //Just AverageValue for Redactor size
+        ImgWidth = 300;
+        ImgHeight = 200;
+    }
+    let NewImageNodeDiv = document.createElement("div");
+    let NewImageNode = document.createElement("img");
     let ImgBase64 = document.getElementById("LoadedImage").src;
     NewImageNode.src = ImgBase64;
-    RedactorData.NoteTextArea.insertNodeDirectly(NewImageNode);
+    NewImageNode.style["maxWidth"] = MaxWidth + "px";
+    NewImageNode.style["maxHeight"] = MaxHeight + "px";
+    NewImageNode.style["width"] = ImgWidth + "px";
+    NewImageNode.style["height"] = ImgHeight + "px";
+    NewImageNodeDiv.append(NewImageNode);
+    NewImageNodeDiv.style["width"] = ImgWidth;
+    NewImageNodeDiv.style["height"] = ImgHeight;
+    RedactorData.NoteTextArea.insertNodeDirectly(NewImageNodeDiv);
 }
 ContextMenuButtons.push(ImageAddButton);//pushing to array of Buttons
 //Class Menu
 export let ContextMenu = new Menu("ContextMenu",ContextMenuButtons);
-//Creation function for Menu
-function ContextMenuFunc(){
- ContextMenu.DOM.addEventListener("contextmenu",
-    (event) => {event.preventDefault;});
- }
-ContextMenu.BindFuncToMenu("contextmenu", ContextMenuFunc, []);//Attaching function to Menu
-
+//Creat function for Menu
+ContextMenu.AddPreventDefault();
 RedactorData.NoteTextArea.DOM.addEventListener("contextmenu", (e) =>{
         e.preventDefault();
         if(getComputedStyle(ContextMenu.DOM).display == "none"){
             ContextMenu.DOM.style.display = "block";
+            let ClientX = e.clientX;
+            let ClientY = e.clientY;
+            ContextMenu.DOM.style.left = ClientX + "px";
+            ContextMenu.DOM.style.top = ClientY + "px";
         }else{
             ContextMenu.DOM.style.display = "none";
         }
 });
+

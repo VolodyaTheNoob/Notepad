@@ -9,6 +9,7 @@ _titleTextArea.AddPreventDefault();
 _noteTextArea.AddOnSelectListener(); 
 _noteTextArea.AddPreventDefault();
 _noteTextArea.AddCursorPositionCheck();
+_noteTextArea.AddShortcutsEvents();
 
 export class RedactorDataClass{
     constructor(titleTextArea, noteTextArea){

@@ -92,7 +92,7 @@ export class TextAreaDOMClass extends TextAreaClass{
                 this.LastSelectedText = selection.toString();
             } 
         }; 
-    }
+        }
         AddCursorPositionCheck(){
             this.DOM.onmouseup = (e) => {
                 this.UpdateSelection();
@@ -102,4 +102,24 @@ export class TextAreaDOMClass extends TextAreaClass{
                 this.LastCursorPosition = this.CursorPostionEnd;
             }
         }
+        AddShortcutsEvents(){
+        this.DOM.addEventListener("keydown" ,  (event) => {
+            //Backward
+            if (event.ctrlKey && event.key === 'z') {
+                
+            }
+            //Forward
+            if (event.ctrlKey && event.key === 'x') {
+                
+            }
+            //CopyEvent
+            if (event.ctrlKey && event.key === 'c') {
+                this.insertNodeInBuffer();
+            }
+            //InsertEvent
+            if (event.ctrlKey && event.key === 'v') {
+                this.insertNodeFromBuffer();
+            }
+        });
+    }
 }
