@@ -9,16 +9,12 @@ let ContextMenuButtons = new Array();
 function AddTag(e,RedactorData, Tag, InnerStyleType = "", InnerStyleValue = ""){
     RedactorData.NoteTextArea.surroundContents(Tag, InnerStyleType, InnerStyleValue);
 }
-function DeleteSelection(){
-    window.getSelection().empty();
-}
 //QuoteButton
 let QuoteButton = new Button("MenuButton","Quote");
 QuoteButton.AddEventFunc("mousedown",QuoteAdd,RedactorData);
 function QuoteAdd(e,RedactorData){
     let Tag = "q";
     AddTag(e,RedactorData,Tag);
-    DeleteSelection();
 }
 ContextMenuButtons.push(QuoteButton);//pushing to array of Buttons
 //BoldButton
@@ -27,7 +23,6 @@ BoldButton.AddEventFunc("mousedown",BoldAdd,RedactorData);
 function BoldAdd(e,RedactorData){
     let Tag = "b";
     AddTag(e,RedactorData, Tag);
-    DeleteSelection();
 }
 ContextMenuButtons.push(BoldButton);//pushing to array of Buttons
 //ItalicsButton
@@ -36,7 +31,6 @@ ItalicsButton.AddEventFunc("mousedown",ItalicsAdd,RedactorData);
 function ItalicsAdd(e,RedactorData){
     let Tag = "i";
     AddTag(e,RedactorData, Tag);
-    DeleteSelection();
 }
 ContextMenuButtons.push(ItalicsButton);//pushing to array of Buttons
 //UnderlinedButton
@@ -45,7 +39,6 @@ UnderlinedButton.AddEventFunc("mousedown",UnderlinedAdd,RedactorData);
 function UnderlinedAdd(e,RedactorData){
     let Tag = "u";
     AddTag(e,RedactorData, Tag);
-    DeleteSelection();
 }
 ContextMenuButtons.push(UnderlinedButton);//pushing to array of Buttons
 //CrossedOutButton
@@ -54,23 +47,20 @@ CrossedOutButton.AddEventFunc("mousedown",CrossedOutAdd,RedactorData);
 function CrossedOutAdd(e,RedactorData){
     let Tag = "s";
     AddTag(e,RedactorData, Tag);
-    DeleteSelection();
 }
 ContextMenuButtons.push(CrossedOutButton);//pushing to array of Buttons
 //CopyButton
 let CopyButton = new Button("MenuButton","Copy");
 CopyButton.AddEventFunc("mousedown",Copy,RedactorData);
 function Copy(e,RedactorData){
-    RedactorData.NoteTextArea.CopyBuffer = RedactorData.NoteTextArea.LastSelectedText;
-    DeleteSelection();
+    RedactorData.NoteTextArea.insertNodeInBuffer();
 }
 ContextMenuButtons.push(CopyButton);//pushing to array of Buttons
 //InsertButton
 let InsertButton = new Button("MenuButton","Insert");
 InsertButton.AddEventFunc("mousedown",Insert,RedactorData);
 function Insert(e,RedactorData){
-    RedactorData.NoteTextArea.insertNode(RedactorData.NoteTextArea.CopyBuffer);
-    DeleteSelection();
+    RedactorData.NoteTextArea.insertNodeFromBuffer();
 }
 ContextMenuButtons.push(InsertButton);//pushing to array of Buttons
 //CutButton
@@ -78,7 +68,6 @@ let CutButton = new Button("MenuButton","Cut");
 CutButton.AddEventFunc("mousedown",Cut,RedactorData);
 function Cut(e,RedactorData){
     RedactorData.NoteTextArea.deleteContents();
-    DeleteSelection();
 }
 ContextMenuButtons.push(CutButton);//pushing to array of Buttons
 //Open pick color menu
@@ -102,7 +91,6 @@ function TextColorAdd(e,RedactorData){
     let InnerStyleType = "color"
     let InnerStyleValue = Color;
     AddTag(e,RedactorData,Tag, InnerStyleType, InnerStyleValue);
-    DeleteSelection();
 }
 ContextMenuButtons.push(TextColorChosenButton);//pushing to array of Buttons
 //Pick color for backgorund text
@@ -114,7 +102,6 @@ function BackgroundTextColorAdd(e,RedactorData){
     let InnerStyleType = "background-color"
     let InnerStyleValue = Color;
     AddTag(e,RedactorData,Tag, InnerStyleType, InnerStyleValue);
-    DeleteSelection();
 }
 ContextMenuButtons.push(BackgroundTextColorChosenButton);//pushing to array of Buttons
 //FontButtonMenuOpen
@@ -143,7 +130,6 @@ function FontAdd(e,RedactorData,fontsize){
     let InnerStyleType = "font-size";
     let InnerStyleValue = fontsize + "px";
     AddTag(e,RedactorData, Tag, InnerStyleType, InnerStyleValue);
-    DeleteSelection();
 }
 ContextMenuButtons.push();//pushing to array of Buttons
 //ImgagePickMenuOpen
@@ -177,7 +163,6 @@ function ImgAdd(e,RedactorData){
     let ImgBase64 = document.getElementById("LoadedImage").src;
     NewImageNode.src = ImgBase64;
     RedactorData.NoteTextArea.insertNodeDirectly(NewImageNode);
-    DeleteSelection();
 }
 ContextMenuButtons.push(ImageAddButton);//pushing to array of Buttons
 //Class Menu
