@@ -12,7 +12,7 @@ function AddTag(e,RedactorData, Tag, InnerStyleType = "", InnerStyleValue = ""){
 //QuoteButton
 let QuoteButton = new Button("MenuButton","Quote");
 QuoteButton.AddEventFunc("mousedown",QuoteAdd,RedactorData);
-function QuoteAdd(e,RedactorData){
+function QuoteAdd(e,[RedactorData]){
     let Tag = "q";
     AddTag(e,RedactorData,Tag);
 }
@@ -20,7 +20,7 @@ ContextMenuButtons.push(QuoteButton);//pushing to array of Buttons
 //BoldButton
 let BoldButton = new Button("MenuButton","Bold");
 BoldButton.AddEventFunc("mousedown",BoldAdd,RedactorData);
-function BoldAdd(e,RedactorData){
+function BoldAdd(e,[RedactorData]){
     let Tag = "b";
     AddTag(e,RedactorData, Tag);
 }
@@ -28,7 +28,7 @@ ContextMenuButtons.push(BoldButton);//pushing to array of Buttons
 //ItalicsButton
 let ItalicsButton = new Button("MenuButton","Italics");
 ItalicsButton.AddEventFunc("mousedown",ItalicsAdd,RedactorData);
-function ItalicsAdd(e,RedactorData){
+function ItalicsAdd(e,[RedactorData]){
     let Tag = "i";
     AddTag(e,RedactorData, Tag);
 }
@@ -36,7 +36,7 @@ ContextMenuButtons.push(ItalicsButton);//pushing to array of Buttons
 //UnderlinedButton
 let UnderlinedButton = new Button("MenuButton","Underlined");
 UnderlinedButton.AddEventFunc("mousedown",UnderlinedAdd,RedactorData);
-function UnderlinedAdd(e,RedactorData){
+function UnderlinedAdd(e,[RedactorData]){
     let Tag = "u";
     AddTag(e,RedactorData, Tag);
 }
@@ -44,7 +44,7 @@ ContextMenuButtons.push(UnderlinedButton);//pushing to array of Buttons
 //CrossedOutButton
 let CrossedOutButton = new Button("MenuButton","CrossedOut");
 CrossedOutButton.AddEventFunc("mousedown",CrossedOutAdd,RedactorData);
-function CrossedOutAdd(e,RedactorData){
+function CrossedOutAdd(e,[RedactorData]){
     let Tag = "s";
     AddTag(e,RedactorData, Tag);
 }
@@ -52,28 +52,28 @@ ContextMenuButtons.push(CrossedOutButton);//pushing to array of Buttons
 //CopyButton
 let CopyButton = new Button("MenuButton","Copy");
 CopyButton.AddEventFunc("mousedown",Copy,RedactorData);
-function Copy(e,RedactorData){
+function Copy(e,[RedactorData]){
     RedactorData.NoteTextArea.insertNodeInBuffer();
 }
 ContextMenuButtons.push(CopyButton);//pushing to array of Buttons
 //InsertButton
 let InsertButton = new Button("MenuButton","Insert");
 InsertButton.AddEventFunc("mousedown",Insert,RedactorData);
-function Insert(e,RedactorData){
+function Insert(e,[RedactorData]){
     RedactorData.NoteTextArea.insertNodeFromBuffer();
 }
 ContextMenuButtons.push(InsertButton);//pushing to array of Buttons
 //CutButton
 let CutButton = new Button("MenuButton","Cut");
 CutButton.AddEventFunc("mousedown",Cut,RedactorData);
-function Cut(e,RedactorData){
+function Cut(e,[RedactorData]){
     RedactorData.NoteTextArea.deleteContents();
 }
 ContextMenuButtons.push(CutButton);//pushing to array of Buttons
 //Open pick color menu
 let ColorButton = new Button("MenuButton","Color");
-ColorButton.AddEventFunc("mousedown",OpenColorPickMenu,RedactorData," ");
-function OpenColorPickMenu(e,RedactorData){
+ColorButton.AddEventFunc("mousedown",OpenColorPickMenu,RedactorData);
+function OpenColorPickMenu(e,[RedactorData]){
     let ColorPickMenu = document.getElementById("ColorPickMenu");
     if(getComputedStyle(ColorPickMenu).display === "none"){
         ColorPickMenu.style.display = "block";
@@ -84,8 +84,8 @@ function OpenColorPickMenu(e,RedactorData){
 ContextMenuButtons.push(ColorButton);//pushing to array of Buttons
 //Pick color for text
 let TextColorChosenButton = new Button("MenuButton","TextColorChosen");
-TextColorChosenButton.AddEventFunc("mousedown",TextColorAdd,RedactorData," ");
-function TextColorAdd(e,RedactorData){
+TextColorChosenButton.AddEventFunc("mousedown",TextColorAdd,RedactorData);
+function TextColorAdd(e,[RedactorData]){
     let Color = document.getElementById("TextColorPickInput").value;
     let Tag = "span"
     let InnerStyleType = "color"
@@ -95,8 +95,8 @@ function TextColorAdd(e,RedactorData){
 ContextMenuButtons.push(TextColorChosenButton);//pushing to array of Buttons
 //Pick color for backgorund text
 let BackgroundTextColorChosenButton = new Button("MenuButton","BackgroundTextColorChosen");
-BackgroundTextColorChosenButton.AddEventFunc("mousedown",BackgroundTextColorAdd,RedactorData," ");
-function BackgroundTextColorAdd(e,RedactorData){
+BackgroundTextColorChosenButton.AddEventFunc("mousedown",BackgroundTextColorAdd,RedactorData);
+function BackgroundTextColorAdd(e,[RedactorData]){
     let Color = document.getElementById("BackgroundTextColorPickInput").value;
     let Tag = "span"
     let InnerStyleType = "background-color"
@@ -106,8 +106,8 @@ function BackgroundTextColorAdd(e,RedactorData){
 ContextMenuButtons.push(BackgroundTextColorChosenButton);//pushing to array of Buttons
 //FontButtonMenuOpen
 let FontSizeButtonMenuOpen = new Button("MenuButton","Font");
-FontSizeButtonMenuOpen.AddEventFunc("mousedown",OpenFontPickMenu,RedactorData,"");
-function OpenFontPickMenu(e,RedactorData){
+FontSizeButtonMenuOpen.AddEventFunc("mousedown",OpenFontPickMenu,RedactorData);
+function OpenFontPickMenu(e,[RedactorData]){
       let FontPickMenu = document.getElementById("FontSizePickMenu");
     if(getComputedStyle(FontPickMenu).display === "none"){
         FontPickMenu.style.display = "block";
@@ -134,8 +134,8 @@ function FontAdd(e,RedactorData,fontsize){
 ContextMenuButtons.push();//pushing to array of Buttons
 //ImgagePickMenuOpen
 let ImgButton = new Button("MenuButton","Image");
-ImgButton.AddEventFunc("mousedown",ImagePickMenuOpen,RedactorData,"");
-function ImagePickMenuOpen(e,RedactorData){
+ImgButton.AddEventFunc("mousedown",ImagePickMenuOpen,RedactorData);
+function ImagePickMenuOpen(e,[RedactorData]){
     let ImagePickMenu = document.getElementById("ImagePickMenu");
     if(getComputedStyle(ImagePickMenu).display === "none"){
         ImagePickMenu.style.display = "block";
@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', e => {
 });
 //ImageAddButton
 let ImageAddButton = new Button("MenuButton","ImageChosen");
-ImageAddButton.AddEventFunc("mousedown",ImgAdd,RedactorData,"");
-function ImgAdd(e,RedactorData){
+ImageAddButton.AddEventFunc("mousedown",ImgAdd,RedactorData);
+function ImgAdd(e,[RedactorData]){
     const MaxWidth = 600;
     const MaxHeight = 400;
     let ImgWidth = document.getElementById("ImageWidthInput").value;

@@ -51,12 +51,11 @@ export class TextAreaDOMClass extends TextAreaClass{
         surroundContents(Tag, InnerStyleType, InnerStyleValue) {
             let newNode = document.createElement(Tag);
             newNode.style[InnerStyleType] = InnerStyleValue;
-            console.log(this.LastSelectedRange);
             try {
                 this.LastSelectedRange.surroundContents(newNode);
                 this.UpdateSelection();
             } catch(e) { 
-                console.log("TextAlreadyWrappedWithTag")
+                //
              }
         }
         DeleteSelection(){

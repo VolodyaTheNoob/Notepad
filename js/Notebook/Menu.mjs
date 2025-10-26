@@ -49,7 +49,7 @@ export class Menu{
         }
         return Position;
     }
-    BindFuncByButtonPosition(event, Position, func, FuncArgs){
+    BindFuncByButtonPosition(event, Position, func, ...FuncArgs){
         this.Buttons[Position].addEventFunc(event, func, FuncArgs);
     }
     AddButton(Button){

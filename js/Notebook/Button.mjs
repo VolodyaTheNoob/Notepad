@@ -25,7 +25,7 @@ export class Button{
     set DOM(value){
         this._DOM = value;
     }
-    AddEventFunc(event, Func, FuncArgs){
+    AddEventFunc(event, Func, ...FuncArgs){
         this.EventsFunctions[event] = new Object();
         this.EventsFunctions[event] = Func;
         this.EventsFunctions[event]["Args"] = FuncArgs;
@@ -33,7 +33,7 @@ export class Button{
             this.EventsFunctions[event](e,this.EventsFunctions[event]["Args"]);
         });
     }
-    ReplaceEventFunc(event, Func, FuncArgs){
+    ReplaceEventFunc(event, Func, ...FuncArgs){
         this.DOM.removeEventListener('event', this.EventsFunctions[event]);
         this.EventsFunctions[event] = Func;
         this.EventsFunctions[event]["Args"] = FuncArgs;
