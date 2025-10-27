@@ -5,6 +5,7 @@ import { RedactorData } from "./RedactorData.mjs";
 
 const SaveButtonID = "SaveButton";
 const SaveMenuID = "SaveMenu";
+const SaveMenuWrapID = "SaveMenuWrap";
 const MenuButtonsClass = "MenuButton";
 const CloseMenuButtonId = "CloseSaveMenu";
 const SaveTextFileButtonID = "SaveAsTextFile";
@@ -15,22 +16,27 @@ const SaveHTMLFileButtonID = "SaveAsHtmlFile";
 let SaveMenuButtons = new Array();
 //Creating external button to open save menu
 export let SaveFileButton = new Button("", SaveButtonID);
-SaveFileButton.AddEventFunc("mousedown",OpenSaveMenu,RedactorData,SaveMenuID);
-function OpenSaveMenu(e, [RedactorData,SaveMenuID]){
+SaveFileButton.AddEventFunc("mousedown",OpenSaveMenu,RedactorData,SaveMenuID,SaveMenuWrapID);
+function OpenSaveMenu(e, [RedactorData,SaveMenuID,SaveMenuWrapID]){
     let SaveMenu = document.getElementById(SaveMenuID);
+    let SaveMenuWrap = document.getElementById(SaveMenuWrapID);
     if(getComputedStyle(SaveMenu).display === "block"){
         SaveMenu.style.display = "none";
+        SaveMenuWrap.style.display = "none";
     }else{
         SaveMenu.style.display = "block";
+        SaveMenuWrap.style.display = "flex";
     }
 }
 //Creating internal menu buttons
 //Creating Close Button
 let CloseMenuButton = new Button(MenuButtonsClass,CloseMenuButtonId);
-CloseMenuButton.AddEventFunc("mousedown",CloseSaveMenu,RedactorData,SaveMenuID);
-function CloseSaveMenu(e, [RedactorData,SaveMenuID]){
+CloseMenuButton.AddEventFunc("mousedown",CloseSaveMenu,RedactorData,SaveMenuID,SaveMenuWrapID);
+function CloseSaveMenu(e, [RedactorData,SaveMenuID,SaveMenuWrapID]){
     let SaveMenu = document.getElementById(SaveMenuID);
+    let SaveMenuWrap = document.getElementById(SaveMenuWrapID);
     SaveMenu.style.display = "none";
+    SaveMenuWrap.style.display = "none";
 }
 SaveMenuButtons.push(CloseMenuButton);//pushing to SaveMenuButtons
 
