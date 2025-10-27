@@ -1,6 +1,11 @@
 body{
     margin: 64px 64px 64px 64px;
 }
+header{
+    -webkit-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.16);
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.16);
+}
 #NavigationMenu{
     width:256px;
     display: inline-block;

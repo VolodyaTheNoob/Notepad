@@ -1,9 +1,52 @@
 body{
-    -webkit-box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.16);
-    -moz-box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.16);
-    box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.16);
     padding: 16px 16px 16px 16px;
+    z-index: 0;
 }
 
+#UserNotes{
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+}
 
+.NoteWrap{
+    position: relative;
+    display: inline-block;
+    margin: 32px 32px 32px 32px;
+    padding: 8px 8px 8px 8px;
+    -webkit-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.16);
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.16);
+    height: 256px;
+    width:256px;
+}
 
+.NoteTagColor{
+    position: relative;
+    display: inline-block;
+    width:8px;
+    height: 160px;
+    background-color: black;;
+}
+
+.Note{
+    position: relative;
+    display: inline-block;
+    height: 256px;
+}
+
+.NoteTitle{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:200px;
+    height: 32px;
+    font-size: 24px;
+}
+
+.NoteText{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:200px;
+    height: 128px;
+    font-size: 16px;
+}

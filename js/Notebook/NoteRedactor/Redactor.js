@@ -13,7 +13,6 @@ function OpenRedactor(e,[OpenRedactorButton]){
     const RedactorWrapID = "RedactorWrap";
     const RedactorDOM = document.getElementById(RedactorID);
     const RedactorWrapDOM = document.getElementById(RedactorWrapID);
-    console.log(RedactorWrapDOM);
     RedactorDOM.style.display = "flex";
     RedactorWrapDOM.style.display = "flex";
     OpenRedactorButton.DOM.style.display = "none";
