@@ -21,91 +21,92 @@
   </div>
 </header>
 <div id="RedactorWrap" style="display: none;">
-    <div id="Redactor">
-        <div id="NoteRedactor">
+        <div id="Redactor">
+            <div class= "close" id="CloseRedactor"></div>
             <div class="arrow left" id="RedactorExitButton"> </div>
-            <div id="TitleRedactor">
-                <label for="NoteTitle"></label>
-                <div contenteditable="true" id="NoteTitle"> </div>
+            <div id="NoteRedactor">
+                <div id="TitleRedactor">
+                    <label for="NoteTitle"></label>
+                    <div contenteditable="true" id="NoteTitle"> </div>
+                </div>
+                <div id="TextRedactor">
+                    <label for="Note"></label>
+                    <div contenteditable="true" id="Note"> </div>
+                </div>
+                <div id="SaveButton">
+                    <button name="SaveButton">Save note</button>
+                </div>
             </div>
-            <div id="TextRedactor">
-                <label for="Note"></label>
-                <div contenteditable="true" id="Note"> </div>
-            </div>
-            <div id="SaveButton">
-                <button name="SaveButton">Save note</button>
-            </div>
-        </div>
-        <div id="ContextMenu">
-            <ul>
-                <li class="MenuButton no-select" id="Quote"><q>Quote</q></li>
-                <li class="MenuButton no-select" id="Bold"><b>Bold</b></li>
-                <li class="MenuButton no-select" id="Italics"><i>Italics</i></li>
-                <li class="MenuButton no-select" id="Underlined"><u>Underlined</u></li>
-                <li class="MenuButton no-select" id="CrossedOut"><s>Crossed out</s></li>
-                <li class="MenuButton no-select" id="Copy">Copy</li>
-                <li class="MenuButton no-select" id="Insert">Insert</li>
-                <li class="MenuButton no-select" id="Cut">Cut</li>
-                <li class="MenuButton no-select" id="Color">Color</li>
-                <ul id="ColorPickMenu" style="display: none;">
-                    <li>
-                    <span>Text Color: </span>     
-                    <input id="TextColorPickInput" value="#000" data-jscolor="{}">
-                    <span class="MenuButton no-select" id="TextColorChosen">Done</span>
-                    </li>
-                    <li>
-                    <span>Background Color: </span>     
-                    <input id="BackgroundTextColorPickInput" value="#000" data-jscolor="{}">
-                    <span class="MenuButton no-select" id="BackgroundTextColorChosen">Done</span>
-                    </li>
-                </ul>
-                <li class="MenuButton no-select" id="Font">Font size</li>
-                <ul id="FontSizePickMenu" style="display: none;"> 
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-8">8</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-9">9</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-10">10</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-11">11</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-12">12</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-14">14</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-16">16</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-18">18</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-20">20</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-22">22</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-24">24</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-26">26</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-28">28</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-36">36</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-48">48</li>
-                    <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-72">72</li>        
-                </ul>
-                <li class="MenuButton no-select" id="Image">Image</li>
-                <ul id="ImagePickMenu" style="display: none;">
-                    <form name="ImagePickForm">
-                        <input name="ImagePickInput" type="file" />
-                        <img id="LoadedImage" style="display: none;"></img>
-                        <span class="MenuButton no-select" id="ImageChosen">Add</span>   
-                        <ul>
-                            <li><span>Width: </span><input id="ImageWidthInput" name="ImageWidthInput" type="text" /></li>
-                            <li><span>Height: </span><input id="ImageHeightInput" name="ImageHeightInput" type="text" /></li>
-                        </ul>
-                    </form>
-                </ul>
-            </ul>
-        </div>
-        <div id="SaveMenuWrap">
-            <div id="SaveMenu">
-                <div class="MenuButton close" id="CloseSaveMenu"></div>
-                <a>Save as: </a>
+            <div id="ContextMenu">
                 <ul>
-                    <li class="MenuButton" id="SaveAsTextFile">Text file</li>
-                    <li class="MenuButton" id="SaveAsJSONFile">Text JSON File</li>
-                    <li class="MenuButton" id="SaveAsWordFile">Word</li>
-                    <li class="MenuButton" id="SaveAsPdfFile">PDF</li>
-                    <li class="MenuButton" id="SaveAsHtmlFile">HTML</li>
+                    <li class="MenuButton no-select" id="Quote"><q>Quote</q></li>
+                    <li class="MenuButton no-select" id="Bold"><b>Bold</b></li>
+                    <li class="MenuButton no-select" id="Italics"><i>Italics</i></li>
+                    <li class="MenuButton no-select" id="Underlined"><u>Underlined</u></li>
+                    <li class="MenuButton no-select" id="CrossedOut"><s>Crossed out</s></li>
+                    <li class="MenuButton no-select" id="Copy">Copy</li>
+                    <li class="MenuButton no-select" id="Insert">Insert</li>
+                    <li class="MenuButton no-select" id="Cut">Cut</li>
+                    <li class="MenuButton no-select" id="Color">Color</li>
+                    <ul id="ColorPickMenu" style="display: none;">
+                        <li>
+                        <span>Text Color: </span>     
+                        <input id="TextColorPickInput" value="#000" data-jscolor="{}">
+                        <span class="MenuButton no-select" id="TextColorChosen">Done</span>
+                        </li>
+                        <li>
+                        <span>Background Color: </span>     
+                        <input id="BackgroundTextColorPickInput" value="#000" data-jscolor="{}">
+                        <span class="MenuButton no-select" id="BackgroundTextColorChosen">Done</span>
+                        </li>
+                    </ul>
+                    <li class="MenuButton no-select" id="Font">Font size</li>
+                    <ul id="FontSizePickMenu" style="display: none;"> 
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-8">8</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-9">9</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-10">10</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-11">11</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-12">12</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-14">14</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-16">16</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-18">18</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-20">20</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-22">22</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-24">24</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-26">26</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-28">28</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-36">36</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-48">48</li>
+                        <li class ="FontSizeToPick MenuButton no-select" id="FontSizeToPick-72">72</li>        
+                    </ul>
+                    <li class="MenuButton no-select" id="Image">Image</li>
+                    <ul id="ImagePickMenu" style="display: none;">
+                        <form name="ImagePickForm">
+                            <input name="ImagePickInput" type="file" />
+                            <img id="LoadedImage" style="display: none;"></img>
+                            <span class="MenuButton no-select" id="ImageChosen">Add</span>   
+                            <ul>
+                                <li><span>Width: </span><input id="ImageWidthInput" name="ImageWidthInput" type="text" /></li>
+                                <li><span>Height: </span><input id="ImageHeightInput" name="ImageHeightInput" type="text" /></li>
+                            </ul>
+                        </form>
+                    </ul>
                 </ul>
             </div>
+            <div id="SaveMenuWrap">
+                <div id="SaveMenu">
+                    <div class="MenuButton close" id="CloseSaveMenu"></div>
+                    <a>Save as: </a>
+                    <ul>
+                        <li class="MenuButton" id="SaveAsTextFile">Text file</li>
+                        <li class="MenuButton" id="SaveAsJSONFile">Text JSON File</li>
+                        <li class="MenuButton" id="SaveAsWordFile">Word</li>
+                        <li class="MenuButton" id="SaveAsPdfFile">PDF</li>
+                        <li class="MenuButton" id="SaveAsHtmlFile">HTML</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
 </div>
 <div id="UserNotes">
     <div class="NoteWrap">
@@ -126,8 +127,25 @@
         </div>
     </div>
 </div>
-<div id="OpenRedactorButton">
-    <span id="OpenRedactorButtonText">&#9998;</span>
+<div id="OpeHowToAddNotesButton">
+    <span id="OpeHowToAddNotesButtonText">&#9998;</span>
+</div>
+<div id="ChoseHowToAddNotesWrap" style="display: none;">
+    <div id="ChoseHowToAddNotes">
+        <div class= "close" id="CloseChcoseHowToAddMenu"></div>
+        <div id="ChoseHowToAddNotesButtons">
+            <div class="ChoseHowToAddButton" id="ChoseRedactorButton">
+                <div>
+                    <span class="ChoseHowToAddButtonText">&#9998;</span>
+                </div>
+            </div>
+            <div class="ChoseHowToAddButton" id="ChoseDownloadButton" style="transform: rotate(90deg);">
+                <div>
+                    <span class="ChoseHowToAddButtonText">&#10144;</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="module" src="../js/Notebook/NoteRedactor/Redactor.js"></script>
 <script type="module" src="../js/Notebook/Notebook.js"></script>

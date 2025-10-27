@@ -4,27 +4,56 @@ import { Button } from "../Button.mjs";
 import {SaveMenu, SaveFileButton} from "./SaveMenu.mjs"
 import { downloadAsTextFile, downloadAsTextFileJSON } from '../Files.mjs';
 
-const OpenRedactorButtonID = "OpenRedactorButton";
-const CloseRedactorButtonID = "RedactorExitButton";
-let OpenRedactorButton = new Button("",OpenRedactorButtonID);
-OpenRedactorButton.AddEventFunc("mousedown",OpenRedactor,OpenRedactorButton);
-function OpenRedactor(e,[OpenRedactorButton]){
-    const RedactorID = "Redactor";
-    const RedactorWrapID = "RedactorWrap";
-    const RedactorDOM = document.getElementById(RedactorID);
-    const RedactorWrapDOM = document.getElementById(RedactorWrapID);
-    RedactorDOM.style.display = "flex";
-    RedactorWrapDOM.style.display = "flex";
-    OpenRedactorButton.DOM.style.display = "none";
+//Open Chose how to add note menu
+const AddNoteChoseMenuID = "ChoseHowToAddNotesWrap"
+const OpenAddNoteChoseMenuButtonID = "OpeHowToAddNotesButton"
+const ChoseRedactorButtonID = "ChoseRedactorButton";
+const RedactorID = "RedactorWrap";
+const CloseAddNoteChoseMenuButtonID = "CloseChcoseHowToAddMenu";
+const CloseRedactorBttonID = "CloseRedactor";
+const GoBackToChoseAddMenuButtonID = "RedactorExitButton";
+const UploadNoteFromFileButtonID = "ChoseDownloadButton";
+let OpenChoseHowToAddNoteButton = new Button("", OpenAddNoteChoseMenuButtonID);
+OpenChoseHowToAddNoteButton.AddEventFunc("mousedown",OpenChoseHowToAddNoteMenu,AddNoteChoseMenuID)
+function OpenChoseHowToAddNoteMenu(e,[AddNoteChoseMenuID]){
+    const ChoseHowToAddNotesMenuDOM = document.getElementById(AddNoteChoseMenuID);
+    ChoseHowToAddNotesMenuDOM.style.display = "flex";
 }
-let CloseRedactorButton = new Button("", CloseRedactorButtonID);
-CloseRedactorButton.AddEventFunc("mousedown",CloseRedactor,OpenRedactorButton);
-function CloseRedactor(e,[OpenRedactorButton]){
-    const RedactorID = "Redactor";
-    const RedactorWrapID = "RedactorWrap";
+//Close Chose how to add note menu
+let CloseAddNoteChoseMenuButton = new Button("",CloseAddNoteChoseMenuButtonID);
+CloseAddNoteChoseMenuButton.AddEventFunc("mousedown",CloseAddNoteChoseMenu,AddNoteChoseMenuID)
+function CloseAddNoteChoseMenu(e,[AddNoteChoseMenuID]){
+    const ChoseHowToAddNotesMenuDOM = document.getElementById(AddNoteChoseMenuID);
+    ChoseHowToAddNotesMenuDOM.style.display = "none";
+}
+//Open redactor
+let ChoseRedactorButton = new Button("",ChoseRedactorButtonID);
+ChoseRedactorButton.AddEventFunc("mousedown",OpenRedactor, RedactorID,AddNoteChoseMenuID)
+function OpenRedactor(e,[RedactorID,AddNoteChoseMenuID]){
+    const AddNoteChoseMenuDOM = document.getElementById(AddNoteChoseMenuID);
     const RedactorDOM = document.getElementById(RedactorID);
-    const RedactorWrapDOM = document.getElementById(RedactorWrapID);
+    RedactorDOM.style.display = "flex";
+    AddNoteChoseMenuDOM.style.display = "none";
+}
+//Close redactor
+let CloseRedactorButton = new Button("",CloseRedactorBttonID);
+CloseRedactorButton.AddEventFunc("mousedown",CloseRedactor,RedactorID);
+function CloseRedactor(e, [RedactorID]){
+    const RedactorDOM = document.getElementById(RedactorID);
     RedactorDOM.style.display = "none";
-    RedactorWrapDOM.style.display = "none";
-    OpenRedactorButton.DOM.style.display = "block";
+}
+//Go back to chose menu from redactor
+let GoBackToChoseAddMenuButton = new Button("", GoBackToChoseAddMenuButtonID);
+GoBackToChoseAddMenuButton.AddEventFunc("mousedown",GoBack,RedactorID,AddNoteChoseMenuID);
+function GoBack(e,[RedactorID,AddNoteChoseMenuID]){
+    const AddNoteChoseMenuDOM = document.getElementById(AddNoteChoseMenuID);
+    const RedactorDOM = document.getElementById(RedactorID);
+    RedactorDOM.style.display = "none";
+    AddNoteChoseMenuDOM.style.display = "flex"
+}
+//Open load note file menu
+let UploadNoteFromFileButton = new Button("",UploadNoteFromFileButtonID);
+UploadNoteFromFileButton.AddEventFunc("mousedown",UploadNoteFromFile);
+function UploadNoteFromFile(e){
+    console.log("Uploading")
 }

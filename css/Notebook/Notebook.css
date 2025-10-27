@@ -50,3 +50,67 @@ body{
     height: 128px;
     font-size: 16px;
 }
+
+#ChoseHowToAddNotesWrap{
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top:0;
+    left:0;
+    z-index: 1;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    
+}
+#ChoseHowToAddNotes{
+    width:556px;
+    height: 356px;
+    background-color: white;
+    display: block;
+    position: relative;
+}
+
+#ChoseHowToAddNotesButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:556px;
+    height: 356px;
+
+}
+
+.ChoseHowToAddButton{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width:128px;
+    height:128px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-left: 48px;
+    margin-right: 48px;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+.ChoseHowToAddButton:hover{
+    cursor: pointer;
+}
+.ChoseHowToAddButton span{
+    font-size: 64px;
+}
+.ChoseHowToAddButton div{
+    margin-top: 16px;
+}
+
+#CloseChcoseHowToAddMenu{
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    margin-right: 8px;
+}
