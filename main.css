@@ -49,3 +49,31 @@ body{
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
+.no-select {
+  -webkit-user-select: none; /* Safari, Chrome, Opera, Edge */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer 10+ */
+  user-select: none;         /* Стандартное свойство */
+}
+
+.Menu{
+    border: 1px solid black;
+    padding: 2px 2px 2px 2px;
+}
+
+.MenuButton:hover{
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background-color: black;
+    clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+    right:0;
+}
+
+.close:hover{
+    cursor:pointer;
+}
