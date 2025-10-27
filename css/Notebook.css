@@ -10,11 +10,56 @@ body{
   -ms-user-select: none;     /* Internet Explorer 10+ */
   user-select: none;         /* Стандартное свойство */
 }
+#RedactorWrap{
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top:0;
+    left:0;
+}
+#RedactorExitButton{
+    width: 4px;
+    height: 4px;
+    margin:12px 8px 8px 8px;
+}
+#OpenRedactorButton{
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    right: 0;
+    bottom: 0;
+    margin-right: 64px;
+    margin-bottom: 64px;
+}
+#OpenRedactorButton:hover{
+    cursor: pointer;
+}
+#OpenRedactorButtonText{
+    font-size: 32px;
+}
+#RedactorExitButton:hover{
+    cursor:pointer;
+}
 #Redactor{
     margin-top:16px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    width:800px;
 }
 #TextRedactor{
     z-index: 2;
